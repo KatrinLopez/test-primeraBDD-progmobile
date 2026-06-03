@@ -6,8 +6,9 @@ class Disciplina {
   Disciplina({this.id, required this.nome, required this.profesor});
 
   Map<String, dynamic> toMap(){
-    return {"id": id, "nome": nome, "profesor": profesor,};
+    return {"id": id, "nome": nome, "profesor": profesor};
   }
+
   factory Disciplina.fromMap(Map<String, dynamic> map){
     return Disciplina(
       id: map['id'],

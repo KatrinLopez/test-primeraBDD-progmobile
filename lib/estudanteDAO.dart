@@ -1,34 +1,37 @@
 import 'package:db2026/databaseHelper.dart';
 import 'package:db2026/estudante.dart';
 
-
-class estudanteDAO{
+class estudanteDAO {
   final Databasehelper _databasehelper = Databasehelper();
 
-  //insert
+  // insert
   Future<void> addEstudante(estudante e) async{
     final db = await _databasehelper.database;
-    await db.insert ('estudante', e.toMap());
+    await db.insert('estudante', e.toMap());
   }
 
-  //update
+  // update
   Future<void> updateEstudante(estudante e) async{
     final db = await _databasehelper.database;
-    await db.update('estudante',
-              e.toMap(),where:"id=?", whereArgs:[e.id]);
-    }
+    await db.update(
+      'estudante',
+      e.toMap(),
+      where: "id=?",
+      whereArgs: [e.id],
+    );
+  }
 
-  //delete
-  Future<void> deleteEstudante(estudante e) async{
+  // delete - Recibe int id directamente
+  Future<void> deleteEstudante(int id) async{
     final db = await _databasehelper.database;
-    await db.delete('estudante',where:"id=?", whereArgs: [e.id]);
+    await db.delete('estudante', where: "id=?", whereArgs: [id]);
   }
   
-  //select
-  Future<List<estudante>> getEstudante()async{
+  // select
+  Future<List<estudante>> getEstudante() async{
     final db = await _databasehelper.database;
-    final List<Map<String, dynamic>> maps =await db.query('estudante');
-    return List.generate(maps.length,(index){
+    final List<Map<String, dynamic>> maps = await db.query('estudante');
+    return List.generate(maps.length, (index){
       return estudante.fromMap(maps[index]);
     });
   }
